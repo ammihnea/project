@@ -1,4 +1,5 @@
 import csv
+import sys
 from datetime import datetime, timedelta
 from collections import defaultdict
 
@@ -31,6 +32,7 @@ def parse_logfile (file):
         for key, time_spent in task.items()
     }
     
+    
 
 # function to analyze the time spent on the task
 def analyze_time(periods):
@@ -50,7 +52,10 @@ def analyze_time(periods):
                 print(f"{label} completed in {time_str}")
             
 if __name__ == "__main__":
-    log_file = "logs.log"
+    if len(sys.argv) < 2:
+        print("Usage: python monitor.py <log_file>")
+        sys.exit(1)
+    log_file = sys.argv[1]
     periods = parse_logfile(log_file)
     analyze_time(periods)
     
