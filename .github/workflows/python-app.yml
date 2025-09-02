@@ -1,0 +1,21 @@
+name: Log Analysis Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  analyze-logs:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Run log analyzer
+      run: python monitor.py logs.log
